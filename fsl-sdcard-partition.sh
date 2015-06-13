@@ -106,11 +106,11 @@ function flash_android
 {
 if [ "${flash_images}" -eq "1" ]; then
     echo "flashing android images..."    
-    #dd if=u-boot.bin of=${node} bs=1k seek=1 skip=1
-    dd if=/dev/zero of=${node}  bs=512 seek=1536 count=16
-    dd if=boot.img of=${node} bs=1M seek=8 #of=${node}${part}1
-    dd if=recovery.img of=${node}${part}2
-    dd if=system.img of=${node}${part}5
+    #dd if=u-boot.bin of=${node} bs=1k seek=1 skip=1 oflag=dsync
+    dd if=/dev/zero of=${node}  bs=512 seek=1536 count=16 oflag=dsync
+    dd if=boot.img of=${node} bs=1M seek=8 oflag=dsync #of=${node}${part}1
+    dd if=recovery.img of=${node}${part}2 oflag=dsync
+    dd if=system.img of=${node}${part}5 oflag=dsync
 fi
 }
 
